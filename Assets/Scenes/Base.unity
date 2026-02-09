@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fc43abcd7faf847a671b193e276fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  nextSceneName: 
+  nextSceneName: Base
 --- !u!1001 &3534170324939809130
 PrefabInstance:
   m_ObjectHideFlags: 0
