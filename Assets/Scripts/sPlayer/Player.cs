@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         axisV = Input.GetAxisRaw("Vertical");
 
         onGraund = Physics2D.CircleCast(transform.position,
-                                      0.2f,
+                                      0.05f,
                                       Vector2.down,
                                       0.0f,
                                       groundLayer
@@ -198,4 +198,8 @@ public class Player : MonoBehaviour
         rBody.linearVelocity = new Vector2(0, 0);
     }
     
+    public float GetAxisH()
+    {
+        return this.axisH;
+    }
 }
