@@ -9,6 +9,7 @@ TagManager:
   - Dead
   - Timer
   - GameManager
+  - ScoreItem
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.Diagnostics;
 
 
 public class UIController : MonoBehaviour
@@ -20,10 +19,15 @@ public class UIController : MonoBehaviour
     private TimeController timeController;
     private bool useTime = true;
 
+    public GameObject scoreTxt;
+    public int stageScore = 0;
+    private int currentScore = 0;
+    private int displayScore = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
         timeController =  GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
         if(timeController != null)
         {
@@ -37,6 +41,7 @@ public class UIController : MonoBehaviour
         Invoke("InactiveImage", 1.0f);
         panel.SetActive(false);
 
+        UpdateScore();
     }
 
     // Update is called once per frame
@@ -100,12 +105,38 @@ public class UIController : MonoBehaviour
                 }
             }
 
+
         }
 
         Debug.Log("gamestate>> " + gamestate);
     }
-        private void InactiveImage()
+
+    private void FixedUpdate()
+    {
+        if (GameManager.gameState == GameState.InGame)
+        {
+            Debug.Log(currentScore + "  , " + displayScore);
+            if (currentScore > displayScore)
+            {
+                displayScore += 1;
+                scoreTxt.GetComponent<TextMeshProUGUI>().text = currentScore.ToString("N0");
+            }
+        }
+    }
+    private void InactiveImage()
     {
         mainImage.SetActive(false);
+    }
+
+    void UpdateScore()
+    {
+        currentScore = stageScore + GameManager.totalScore;
+        scoreTxt.GetComponent<TextMeshProUGUI>().text = currentScore.ToString("N0");
+    }
+    
+    public void UpdateScore(int score)
+    {
+        stageScore += score;
+        currentScore = stageScore + GameManager.totalScore;
     }
 }

@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +20,7 @@ public class Player : MonoBehaviour
     string nowAnime = "";
     string oldAnime = "";
 
+    public int score = 0;
     //bool isJump = true;
     //bool isUpArrow=true;
     
@@ -161,6 +160,21 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Dead");
             Dead();
+        }
+        else if(collision.gameObject.tag == "ScoreItem")
+        {
+            
+            ScoreItem item = collision.gameObject.GetComponent<ScoreItem>();
+            score = item.itemdata.value;
+            UIController ui = Object.FindFirstObjectByType<UIController>();
+
+            if (ui != null)
+            {
+                ui.UpdateScore(score);
+            }
+            score = 0;
+            Destroy(collision.gameObject);
+
         }
 
     }

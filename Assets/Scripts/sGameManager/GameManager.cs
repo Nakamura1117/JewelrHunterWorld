@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public string nextSceneName;
     //public string nextGameState;
 
+    public static int totalScore;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
