@@ -890,7 +890,7 @@ GameObject:
   - component: {fileID: 1278769871}
   - component: {fileID: 1278769870}
   m_Layer: 5
-  m_Name: TimeBar
+  m_Name: Image(TimerFlame)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -911,9 +911,9 @@ RectTransform:
   - {fileID: 2102890730}
   m_Father: {fileID: 2108136374}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -60}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 430, y: 330}
   m_SizeDelta: {x: 412, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278769870
@@ -6029,7 +6029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a37885798cf401544a68934de74ffc16, type: 2}
   m_sharedMaterial: {fileID: -6616639493799218869, guid: a37885798cf401544a68934de74ffc16, type: 2}
@@ -6293,7 +6293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeController
   isCountDown: 1
-  gameTime: 120
+  gameTime: 5
 --- !u!1001 &1947604626871133603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6306,9 +6306,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5413636492389639562, guid: 1a75c5fa06d415142b1b344b26427e8b, type: 3}
+      propertyPath: camLeft
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7659946104213572146, guid: 1a75c5fa06d415142b1b344b26427e8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.72
       objectReference: {fileID: 0}
     - target: {fileID: 7659946104213572146, guid: 1a75c5fa06d415142b1b344b26427e8b, type: 3}
       propertyPath: m_LocalPosition.y

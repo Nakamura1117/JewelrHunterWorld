@@ -7,6 +7,8 @@ TagManager:
   - "\u5730\u5F62"
   - Goal
   - Dead
+  - Timer
+  - GameManager
   layers:
   - Default
   - TransparentFX

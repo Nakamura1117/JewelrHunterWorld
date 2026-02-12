@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     public GameObject subBack1;
     public GameObject subBack2;
     public float subBackScrollSpeed =0.005f;
-    public float subBackWidth = 19.2f;
+    public float subBackWidth = 19.1f;
 
     public bool isForceScrollX=false;
     public bool isForceScrollY=false;
@@ -103,18 +103,12 @@ public class CameraController : MonoBehaviour
 
     void SubBackPositionChange(string vector)
     {
-        Debug.Log(vector);
-        Debug.Log("sub1 posx> " + subBack1.transform.localPosition.x);
-        Debug.Log("sub2 posx> " + subBack2.transform.localPosition.x);
-
         if (vector == "right")
         {
             if (subBack1.transform.localPosition.x <= -(subBackWidth))
             {
                 float diff = -(subBackWidth) - subBack1.transform.localPosition.x;
-                Debug.Log("sib1 diff>> " + diff);
-                Debug.Log("subBackWidth + diff >> " + (subBackWidth + diff));
-
+                
                 subBack1.transform.localPosition = new Vector3(
                     subBackWidth + diff,
                     subBack1.transform.localPosition.y,
@@ -124,8 +118,7 @@ public class CameraController : MonoBehaviour
             if (subBack2.transform.localPosition.x <= -(subBackWidth))
             {
                 float diff = -(subBackWidth) - subBack2.transform.localPosition.x;
-                Debug.Log("sib2 diff>> " + diff);
-                Debug.Log("subBackWidth + diff >> " + (subBackWidth + diff));
+                
                 subBack2.transform.localPosition = new Vector3(
                     19.2f + diff,
                     subBack2.transform.localPosition.y,

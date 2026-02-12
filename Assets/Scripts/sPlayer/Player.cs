@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         axisV = Input.GetAxisRaw("Vertical");
 
         onGraund = Physics2D.CircleCast(transform.position,
-                                      0.05f,
+                                      0.1f,
                                       Vector2.down,
                                       0.0f,
                                       groundLayer
