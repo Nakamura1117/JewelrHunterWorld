@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
             transform.localScale = new Vector2(-1, 1);// 向きの変更
         }
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -27,21 +27,18 @@ public class EnemyController : MonoBehaviour
                                         Vector2.down,          // 発射方向
                                         0.0f,                  // 発射距離
                                         groundLayer);          // 検出するレイヤー
+
+
         if (revTime > 0)
         {
             time += Time.deltaTime;
             if (time >= revTime)
             {
-                isToRight = !isToRight;     //フラグを反転させる
                 time = 0;                   //タイマーを初期化
-                if (isToRight)
-                {
-                    transform.localScale = new Vector2(-1, 1);  // 向きの変更
-                }
-                else
-                {
-                    transform.localScale = new Vector2(1, 1);   // 向きの変更
-                }
+
+                returnDirect();
+             
+
             }
         }
     }
@@ -67,6 +64,7 @@ public class EnemyController : MonoBehaviour
     // 接触
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("enter");
         isToRight = !isToRight;     //フラグを反転させる
         time = 0;                   //タイマーを初期化
         if (isToRight)
@@ -77,5 +75,19 @@ public class EnemyController : MonoBehaviour
         {
             transform.localScale = new Vector2(1, 1); // 向きの変更
         }
+    }
+
+    public void returnDirect()
+    {
+        isToRight = !isToRight;
+        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        //if (isToRight)
+        //{
+        //    transform.localScale = new Vector2(-1, 1);  // 向きの変更
+        //}
+        //else
+        //{
+        //    transform.localScale = new Vector2(1, 1);   // 向きの変更
+        //}
     }
 }

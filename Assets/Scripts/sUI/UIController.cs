@@ -63,7 +63,7 @@ public class UIController : MonoBehaviour
                 timeController.IsTimeOver();
                 int time = (int)timeController.GetDisplayTime();
 
-                GameManager.totalScore += time * 10;
+                GameManager.totalScore += time * 100;
             }
 
             GameManager.totalScore += stageScore;
