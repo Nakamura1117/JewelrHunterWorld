@@ -35,10 +35,7 @@ public class EnemyController : MonoBehaviour
             if (time >= revTime)
             {
                 time = 0;                   //タイマーを初期化
-
                 returnDirect();
-             
-
             }
         }
     }
@@ -64,23 +61,39 @@ public class EnemyController : MonoBehaviour
     // 接触
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         Debug.Log("enter");
-        isToRight = !isToRight;     //フラグを反転させる
+        returnDirect();
         time = 0;                   //タイマーを初期化
-        if (isToRight)
+
+        //isToRight = !isToRight;     //フラグを反転させる
+        //if (isToRight)
+        //{
+        //    transform.localScale = new Vector2(-1, 1); // 向きの変更
+        //}
+        //else
+        //{
+        //    transform.localScale = new Vector2(1, 1); // 向きの変更
+        //}
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("地形"))
         {
-            transform.localScale = new Vector2(-1, 1); // 向きの変更
-        }
-        else
-        {
-            transform.localScale = new Vector2(1, 1); // 向きの変更
+            if (transform.parent != null)
+            {
+                Debug.Log("Judg return");
+                returnDirect();
+            }
         }
     }
 
     public void returnDirect()
     {
         isToRight = !isToRight;
-        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y,transform.localScale.z);
+        
+
         //if (isToRight)
         //{
         //    transform.localScale = new Vector2(-1, 1);  // 向きの変更
