@@ -27,11 +27,11 @@ public class UIController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        timeController =  GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
-        if(timeController != null)
+
+        timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
+        if (timeController != null)
         {
-            if(timeController.gameTime == 0.0f)
+            if (timeController.gameTime == 0.0f)
             {
                 timeUI.SetActive(false);
                 useTime = false;
@@ -61,9 +61,15 @@ public class UIController : MonoBehaviour
             if (timeController != null)
             {
                 timeController.IsTimeOver();
-
                 int time = (int)timeController.GetDisplayTime();
+
+                GameManager.totalScore += time * 10;
             }
+
+            GameManager.totalScore += stageScore;
+            stageScore = 0;
+            UpdateScore();
+
 
         }
         else if (GameManager.gameState == GameState.GameOver)
@@ -92,12 +98,12 @@ public class UIController : MonoBehaviour
                 {
                     int time = (int)timeController.GetDisplayTime();
                     timeTxt.GetComponent<TextMeshProUGUI>().text = time.ToString("D3");
-                    if (useTime && timeController.isCountDown &&  time <= 0)
+                    if (useTime && timeController.isCountDown && time <= 0)
                     {
                         GameObject.FindWithTag("Player").GetComponent<Player>().Dead();
 
                     }
-                    else if(useTime && !(timeController.isCountDown) && timeController.gameTime <= time)
+                    else if (useTime && !(timeController.isCountDown) && timeController.gameTime <= time)
                     {
                         GameObject.FindWithTag("Player").GetComponent<Player>().Dead();
                     }
@@ -115,7 +121,8 @@ public class UIController : MonoBehaviour
     {
         if (GameManager.gameState == GameState.InGame)
         {
-            Debug.Log(currentScore + "  , " + displayScore);
+            //Debug.Log(currentScore + "  , " + displayScore);
+
             if (currentScore > displayScore)
             {
                 displayScore += 1;
@@ -133,7 +140,7 @@ public class UIController : MonoBehaviour
         currentScore = stageScore + GameManager.totalScore;
         scoreTxt.GetComponent<TextMeshProUGUI>().text = currentScore.ToString("N0");
     }
-    
+
     public void UpdateScore(int score)
     {
         stageScore += score;

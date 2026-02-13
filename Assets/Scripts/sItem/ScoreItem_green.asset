@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375723ffb216fea43b3ac401105794b1, type: 3}
   m_Name: ScoreItem_green
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  value: 10
+  value: 100
   itemName: green
   itemSprite: {fileID: 506777212851872085, guid: 4a77e7eaa4f767b49827ab08608218ed, type: 3}
