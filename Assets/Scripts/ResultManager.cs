@@ -27,7 +27,7 @@ public class ResultManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        scoreText.text = GameManager.totalScore.ToString();
+        scoreText.text = GameManager.totalScore.ToString("N0");
     }
 
     // Update is called once per frame

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -23,9 +25,15 @@ public class Player : MonoBehaviour
     public int score = 0;
     //bool isJump = true;
     //bool isUpArrow=true;
-    
+
     //bool atRight = false;
     //bool atLeft = false;
+
+    InputAction moveAction;
+    InputAction jumpAction;
+    PlayerInput input;
+
+    GameManager gm;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +45,16 @@ public class Player : MonoBehaviour
         oldAnime = idolAnime;
         //atRight = false;
         //atLeft = false;
+
+        input = this.GetComponent<PlayerInput>();
+        moveAction = input.currentActionMap.FindAction("Move");
+        jumpAction = input.currentActionMap.FindAction("Jump");
+
+        gm = GameObject.FindFirstObjectByType<GameManager>();
+
+        InputActionMap uiMap = input.actions.FindActionMap("UI");
+        uiMap.Disable();
+
     }
 
     // Update is called once per frame
@@ -47,10 +65,6 @@ public class Player : MonoBehaviour
             return; 
         }
 
-
-        axisH = Input.GetAxisRaw("Horizontal");
-        axisV = Input.GetAxisRaw("Vertical");
-
         onGraund = Physics2D.CircleCast(transform.position,
                                       0.1f,
                                       Vector2.down,
@@ -58,11 +72,22 @@ public class Player : MonoBehaviour
                                       groundLayer
                                       );
 
-        if (Input.GetButtonDown("Jump"))
+        if (jumpAction.WasPressedThisFrame())
         {
-            //Debug.Log("downjump");
-            goJump=true;
+            goJump = true;
         }
+        axisH = moveAction.ReadValue<Vector2>().x;
+
+
+        //axisH = Input.GetAxisRaw("Horizontal");
+        //axisV = Input.GetAxisRaw("Vertical");
+
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    //Debug.Log("downjump");
+        //    goJump=true;
+        //}
+
         if (axisH > 0.0f)
         {
             Debug.Log("‰EŒü‚«");
@@ -177,14 +202,35 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnSubmit(InputValue input)
     {
+        if(GameManager.gameState != GameState.InGame)
+        {
+            gm.GameEnd();
+        }
+    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
         //if (collision.gameObject.layer == 6)
         //{
         //    isJump = true;
         //}
-    }
+    //}
 
+    //private void OnMove(InputValue value)
+    //{
+    //    Vector2 moveIn  = value.Get<Vector2>();
+    //    axisH = moveIn.x;
+    //}
+
+    //private void OnJump(InputValue value)
+    //{
+    //    if (value.isPressed)
+    //    {
+    //        goJump = true;
+    //    }
+    //}
+    
     public void Goal ()
     {
         GameManager.gameState = GameState.GameClear;
@@ -208,10 +254,15 @@ public class Player : MonoBehaviour
    private void GameStop()
     {
         rBody.linearVelocity = new Vector2(0, 0);
+
+        input.currentActionMap.Disable();
+        input.SwitchCurrentActionMap("UI");
+        input.currentActionMap.Enable();
     }
     
     public float GetAxisH()
     {
         return this.axisH;
     }
+
 }

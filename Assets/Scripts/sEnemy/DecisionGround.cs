@@ -5,8 +5,6 @@ public class DecisionGround : MonoBehaviour
 {
     private Rigidbody2D decisionItem;
 
-    float time = 0;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public AudioClip meGameClear;
     public AudioClip meGameOver;
 
+    public bool isGameClear = false;
+    public bool isGameOver = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,23 +58,40 @@ public class GameManager : MonoBehaviour
             audioSource.Stop();
             audioSource.PlayOneShot(meGameClear);
             gameState = GameState.GameEnd;
+            isGameClear = true;
         }
         else if (gameState == GameState.GameOver)
         {
             audioSource.Stop();
             audioSource.PlayOneShot(meGameOver);
             gameState = GameState.GameEnd;
+            isGameOver = true;
         }
     }
 
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Next()
     {
         SceneManager.LoadScene(nextSceneName);
     }
+
+    public void GameEnd()
+    {
+        if (gameState == GameState.GameEnd)
+        {
+            if (isGameClear) 
+            {
+                Next(); 
+            }
+            else if (isGameOver) {
+                Restart(); 
+            }
+        }
+    }
+
 }
