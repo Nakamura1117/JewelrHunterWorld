@@ -131,7 +131,7 @@ public class CameraController : MonoBehaviour
             {
                 float diff = subBack1.transform.localPosition.x - subBackWidth;
                 subBack1.transform.localPosition = new Vector3(
-                    -(subBackWidth) + diff,
+                    -(subBackWidth) - diff,
                     subBack1.transform.localPosition.y,
                     subBack1.transform.localPosition.z);
             }
@@ -139,7 +139,7 @@ public class CameraController : MonoBehaviour
             {
                 float diff = subBack2.transform.localPosition.x - subBackWidth;
                 subBack2.transform.localPosition = new Vector3(
-                    -(subBackWidth) + diff,
+                    -(subBackWidth) - diff,
                     subBack2.transform.localPosition.y,
                     subBack2.transform.localPosition.z);
             }

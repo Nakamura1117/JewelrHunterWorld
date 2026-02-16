@@ -1,5 +1,6 @@
 //using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -18,9 +19,14 @@ public class GameManager : MonoBehaviour
 
     public static int totalScore;
 
+    AudioSource audioSource;
+    public AudioClip meGameClear;
+    public AudioClip meGameOver;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gameState = GameState.InGame;
 
     }
@@ -39,6 +45,22 @@ public class GameManager : MonoBehaviour
         if (gameState != GameState.InGame)
         {
             return;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (gameState == GameState.GameClear)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(meGameClear);
+            gameState = GameState.GameEnd;
+        }
+        else if (gameState == GameState.GameOver)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(meGameOver);
+            gameState = GameState.GameEnd;
         }
     }
 

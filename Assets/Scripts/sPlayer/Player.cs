@@ -145,8 +145,6 @@ public class Player : MonoBehaviour
                 rBody.AddForce(jumpPow, ForceMode2D.Impulse);
                 goJump = false;
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

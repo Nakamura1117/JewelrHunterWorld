@@ -27,7 +27,6 @@ public class UIController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
         timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
         if (timeController != null)
         {
@@ -55,8 +54,6 @@ public class UIController : MonoBehaviour
             Button bt = restartGutton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameClearSpr;
-            GameManager.gameState = GameState.GameEnd;
-
 
             if (timeController != null)
             {
@@ -80,7 +77,6 @@ public class UIController : MonoBehaviour
             Button bt = nextButton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameOverSpr;
-            GameManager.gameState = GameState.GameEnd;
 
             if (timeController != null)
             {
