@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     {
         if (isToRight)
         {
-            transform.localScale = new Vector2(-1, 1);// 向きの変更
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);// 向きの変更
         }
     }
     

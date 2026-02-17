@@ -10,6 +10,7 @@ TagManager:
   - Timer
   - GameManager
   - ScoreItem
+  - Switch
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Wall
   - Shell
   - Enemy
-  - 
+  - Item
   - 
   - 
   - 

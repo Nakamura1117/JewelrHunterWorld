@@ -72,11 +72,11 @@ public class Player : MonoBehaviour
                                       groundLayer
                                       );
 
-        if (jumpAction.WasPressedThisFrame())
-        {
-            goJump = true;
-        }
-        axisH = moveAction.ReadValue<Vector2>().x;
+        //if (jumpAction.WasPressedThisFrame())
+        //{
+        //    goJump = true;
+        //}
+        //axisH = moveAction.ReadValue<Vector2>().x;
 
 
         //axisH = Input.GetAxisRaw("Horizontal");
@@ -211,26 +211,26 @@ public class Player : MonoBehaviour
     }
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
-        //if (collision.gameObject.layer == 6)
-        //{
-        //    isJump = true;
-        //}
+    //if (collision.gameObject.layer == 6)
+    //{
+    //    isJump = true;
+    //}
     //}
 
-    //private void OnMove(InputValue value)
-    //{
-    //    Vector2 moveIn  = value.Get<Vector2>();
-    //    axisH = moveIn.x;
-    //}
+    private void OnMove(InputValue value)
+    {
+        Vector2 moveIn = value.Get<Vector2>();
+        axisH = moveIn.x;
+    }
 
-    //private void OnJump(InputValue value)
-    //{
-    //    if (value.isPressed)
-    //    {
-    //        goJump = true;
-    //    }
-    //}
-    
+    private void OnJump(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            goJump = true;
+        }
+    }
+
     public void Goal ()
     {
         GameManager.gameState = GameState.GameClear;
