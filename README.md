@@ -5,3 +5,6 @@
 
 使用アセット　SunnyLand Artwork（Ansimuz様作）
 ＵＲＬ　https://assetstore.unity.com/packages/2d/characters/sunny-land-103349
+
+効果音　借用
+・効果音工房 様（https://umipla.com/）
