@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 85316dabfa055a64a8ccf2379942bc3c
   - enabled: 1
+    path: Assets/Scenes/WarldMap.unity
+    guid: d84510f03d3c5c14186bfaeaf8884ab7
+  - enabled: 1
     path: Assets/Scenes/Base.unity
     guid: 266be369e45394a4e932e20663d27b7c
   - enabled: 1

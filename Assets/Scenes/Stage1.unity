@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 8e9eef88b7796c9468fae387d0bc9e89, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &60541815
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -544,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &234847857
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -784,6 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: e1354d1ced4a9b9428fed5241719453b, type: 2}
+  clip: {fileID: 0}
 --- !u!58 &327325750
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1059,6 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &446823678
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1201,6 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &452219142
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1343,6 +1348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &475200998
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1485,6 +1491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 8e9eef88b7796c9468fae387d0bc9e89, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &499861605
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1701,6 +1708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &570736642
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1900,6 +1908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &700007465
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2353,6 +2362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 8e9eef88b7796c9468fae387d0bc9e89, type: 2}
+  clip: {fileID: 0}
 --- !u!58 &798974683
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2495,6 +2505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 8e9eef88b7796c9468fae387d0bc9e89, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &855314091
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2637,6 +2648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &895765406
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2848,6 +2860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 8e9eef88b7796c9468fae387d0bc9e89, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &921854810
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3127,6 +3140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1027224204
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3269,6 +3283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1155583304
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3411,6 +3426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1176989382
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3762,6 +3778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1324644538
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3904,6 +3921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1405962801
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4046,6 +4064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1524982681
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4188,6 +4207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1533142685
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4330,6 +4350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1548329931
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9257,6 +9278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 0}
 --- !u!58 &1632290471
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9399,6 +9421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1706168185
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9541,6 +9564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1715057473
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9762,6 +9786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1813362150
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9904,6 +9929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1824449103
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10191,6 +10217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1848449439
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10333,6 +10360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1940014215
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10475,6 +10503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1978524593
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10617,6 +10646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 8e9eef88b7796c9468fae387d0bc9e89, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1990610692
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10869,6 +10899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 0}
 --- !u!1 &1998753441
 GameObject:
   m_ObjectHideFlags: 0
@@ -10901,6 +10932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &1998753443
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11043,6 +11075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: d2b0ca5068e70214ca98421b689dd3de, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &2038629568
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11322,6 +11355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
+  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}
 --- !u!58 &2102597230
 CircleCollider2D:
   m_ObjectHideFlags: 0
