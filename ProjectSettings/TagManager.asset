@@ -11,6 +11,8 @@ TagManager:
   - GameManager
   - ScoreItem
   - Switch
+  - Entrance
+  - WorldUI
   layers:
   - Default
   - TransparentFX

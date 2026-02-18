@@ -1,4 +1,5 @@
 //using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -26,11 +27,33 @@ public class GameManager : MonoBehaviour
     public bool isGameClear = false;
     public bool isGameOver = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static int currentDoorNumber = 0;
+    public static int keys = 1;
+    public static Dictionary<string, bool> keyGot;
+    public static int arrows = 10;
+
+
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         gameState = GameState.InGame;
+
+        if (keyGot == null)
+        {
+            keyGot = new Dictionary<string, bool>();
+        }
+
+        if (!(keyGot.ContainsKey(SceneManager.GetActiveScene().name)))
+        {
+            keyGot.Add(SceneManager.GetActiveScene().name, false);
+        }
+
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
 
     }
 

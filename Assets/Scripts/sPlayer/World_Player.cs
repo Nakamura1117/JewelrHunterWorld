@@ -16,6 +16,14 @@ public class World_Player : MonoBehaviour
     Animator animator;
 
 
+    bool isActionButtonPressed;
+    public bool IsActionButtonPressed
+    {
+        get { return isActionButtonPressed; }
+        set { isActionButtonPressed = value; }
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,7 +63,7 @@ public class World_Player : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         rbody.linearVelocity = new Vector2(moveVec.x * speed, moveVec.y * speed);
     }
@@ -64,6 +72,13 @@ public class World_Player : MonoBehaviour
     {
         moveVec = input.Get<Vector2>();
     }
+
+    void OnActionButton(InputValue value)
+    {
+        IsActionButtonPressed = value.isPressed;
+    }
+
+    
 
     private float GetAngle()
     {

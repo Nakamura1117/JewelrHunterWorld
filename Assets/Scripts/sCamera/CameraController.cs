@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         playercontroller = player.GetComponent<Player>();
-        this.transform.position = new Vector3(0, 0, -10);
+        this.transform.position = new Vector3(5, 0, -10);
 
     }
 
