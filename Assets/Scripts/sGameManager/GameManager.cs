@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
     public static Dictionary<string, bool> keyGot;
     public static int arrows = 10;
 
+    public static int defaultPlayerLife = 10;
+
+    static int pendingArrows;
+    static int pendingKeys;
+    static Dictionary<string, bool> pendingKeyGot = new Dictionary<string, bool>();
+
 
     private void Awake()
     {
@@ -53,8 +59,10 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        arrows = 10;
+        keys = 1;
 
-
+        PendingItems();
     }
 
     // Update is called once per frame
@@ -117,4 +125,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void PendingItems()
+    {
+        pendingArrows = arrows;
+        pendingKeys = keys;
+        foreach(var k in keyGot)
+        {
+            pendingKeyGot[k.Key] = k.Value;
+        }
+    }
+
+    public static void ReturnPending()
+    {
+        arrows = pendingArrows;
+        keys = pendingKeys;
+
+        foreach(var k in pendingKeyGot)
+        {
+            if(k.Value != keyGot[k.Key])
+            {
+                keyGot[k.Key] = k.Value;
+            }
+        }
+    }
 }

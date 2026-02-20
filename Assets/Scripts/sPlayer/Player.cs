@@ -1,3 +1,6 @@
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -23,6 +26,16 @@ public class Player : MonoBehaviour
     string oldAnime = "";
 
     public int score = 0;
+    public static int playerLife = 10;
+    private bool inDamage = false;
+
+    public float shootSpeed = 12.0f;
+    public float shootDelay = 0.25f;
+    public GameObject arrowPrefab;
+    public GameObject gate;
+    public static int hasArrows = 0;
+    InputAction attackAction;
+
     //bool isJump = true;
     //bool isUpArrow=true;
 
@@ -55,13 +68,27 @@ public class Player : MonoBehaviour
         InputActionMap uiMap = input.actions.FindActionMap("UI");
         uiMap.Disable();
 
+        playerLife = GameManager.defaultPlayerLife;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState != GameState.InGame) 
-        { 
+        if (GameManager.gameState != GameState.InGame || inDamage == true) 
+        {
+            if (inDamage)
+            {
+                float val = Mathf.Sin(Time.time * 50);
+                if (val > 0)
+                {
+                    GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else 
+                { 
+                    GetComponent<SpriteRenderer>().enabled = false; 
+                }
+            }
+
             return; 
         }
 
@@ -138,7 +165,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.gameState != GameState.InGame)
+        if (GameManager.gameState != GameState.InGame || inDamage==true)
         {
             return;
         }
@@ -196,8 +223,18 @@ public class Player : MonoBehaviour
                 ui.UpdateScore(score);
             }
             score = 0;
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<ScoreItem>().meDestoroy();
+        }
+        else if(collision.gameObject.tag == "Enemy")
+        {
+            if (!inDamage)
+            {
+                GetDamage(collision.gameObject);
+            }
+            else 
+            {
 
+            }
         }
 
     }
@@ -228,6 +265,15 @@ public class Player : MonoBehaviour
         if (value.isPressed)
         {
             goJump = true;
+        }
+    }
+
+    private void OnAttack(InputValue value)
+    {
+        Debug.Log("OnAction");
+        if(GameManager.arrows > 0)
+        {
+            ShootArrow();
         }
     }
 
@@ -263,6 +309,63 @@ public class Player : MonoBehaviour
     public float GetAxisH()
     {
         return this.axisH;
+    }
+
+    public static void PlayerRecovery(int life)
+    {
+        playerLife += life;
+        if(playerLife > 10) playerLife = 10;
+    }
+
+    private void GetDamage(GameObject target)
+    {
+        if (GameManager.gameState != GameState.InGame) return;
+
+        playerLife -= 1;
+        if (playerLife > 0)
+        {
+            rBody.linearVelocity = Vector2.zero;
+            Vector3 v = (transform.position - target.transform.position).normalized;
+            rBody.AddForce(new Vector2(v.x * 4, v.y * 4), ForceMode2D.Impulse);
+            inDamage = true;
+            Invoke("DamageEnd", 0.5f);
+        }
+        else
+        {
+            Dead();
+        }
+    }
+
+    private void DamageEnd()
+    {
+        inDamage = false;
+        GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    private void ShootArrow()
+    {
+        Quaternion r;
+        GameManager.arrows--;
+
+        if(transform.localScale.x > 0)
+        {
+            r = Quaternion.Euler(0, 0, 0);
+        }else
+        {
+            r = Quaternion.Euler(0, 0, 180);
+        }
+
+        GameObject arrowObj = Instantiate(
+            arrowPrefab, 
+            gate.transform.position,
+            r);
+
+        Rigidbody2D arrowRbody = arrowObj.GetComponent<Rigidbody2D>();
+        arrowRbody.AddForce(
+            new Vector2(transform.localScale.x * shootSpeed, 0),
+            ForceMode2D.Impulse
+            );
+
     }
 
 }

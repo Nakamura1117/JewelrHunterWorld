@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Mathematics;
 
 
 public class UIController : MonoBehaviour
@@ -24,9 +25,21 @@ public class UIController : MonoBehaviour
     private int currentScore = 0;
     private int displayScore = 0;
 
+    public TextMeshProUGUI keyText;
+    int currentKeys;
+    public TextMeshProUGUI arrowText;
+    int currentArrows;
+    public Slider lifeSlider;
+    int currentLife;
+
+    public GameObject scaleLine;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        GameManager.PendingItems();
+        mainImage.transform.localPosition = Vector3.zero;
         timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
         if (timeController != null)
         {
@@ -41,6 +54,29 @@ public class UIController : MonoBehaviour
         panel.SetActive(false);
 
         UpdateScore();
+
+        currentKeys = GameManager.keys;
+        keyText.text = currentKeys.ToString();
+
+        currentArrows = GameManager.arrows;
+        arrowText.text = currentArrows.ToString();
+
+        currentLife = Player.playerLife;
+
+        Vector2 rect = lifeSlider.GetComponent<RectTransform>().sizeDelta;
+        float sliderWidth = rect.x;
+        int lineSpace = (int)sliderWidth / Player.playerLife;
+        GameObject[] scaleLines = new GameObject[currentLife];
+
+        for (int i = 0; i < currentLife-1; i++) 
+        {
+            Debug.Log(i);
+            float p = (lineSpace * (i + 1)) - 1;
+            scaleLines[i] = Instantiate(scaleLine, Vector3.zero, quaternion.identity, scaleLine.transform.parent);
+
+            scaleLines[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(p, 0);
+            scaleLines[i].SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -48,6 +84,7 @@ public class UIController : MonoBehaviour
     {
         if (GameManager.gameState == GameState.GameClear)
         {
+            mainImage.transform.localPosition = new Vector3(0, 120, 0);
             gamestate = GameState.GameClear;
             mainImage.SetActive(true);
             panel.SetActive(true);
@@ -66,11 +103,10 @@ public class UIController : MonoBehaviour
             GameManager.totalScore += stageScore;
             stageScore = 0;
             UpdateScore();
-
-
         }
         else if (GameManager.gameState == GameState.GameOver)
         {
+            mainImage.transform.localPosition = new Vector3(0, 120, 0);
             gamestate = GameState.GameOver;
             mainImage.SetActive(true);
             panel.SetActive(true);
@@ -78,17 +114,34 @@ public class UIController : MonoBehaviour
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameOverSpr;
 
+            GameManager.ReturnPending();
+
             if (timeController != null)
             {
                 timeController.IsTimeOver();
             }
-
         }
         else if (GameManager.gameState == GameState.InGame)
         {
             if (timeController != null)
             {
                 if (GameObject.FindWithTag("Player").GetComponent<Player>() == null) { return; }
+
+                if (currentKeys != GameManager.keys)
+                {
+                    currentKeys = GameManager.keys;
+                    keyText.text = currentKeys.ToString();
+                }
+                if (currentArrows != GameManager.arrows)
+                {
+                    currentArrows = GameManager.arrows;
+                    arrowText.text = currentArrows.ToString();
+                }
+                if (currentLife != Player.playerLife)
+                {
+                    currentLife = Player.playerLife;
+                    lifeSlider.value = currentLife;
+                }
 
                 if (timeController.gameTime > 0.0f)
                 {
@@ -103,11 +156,8 @@ public class UIController : MonoBehaviour
                     {
                         GameObject.FindWithTag("Player").GetComponent<Player>().Dead();
                     }
-
                 }
             }
-
-
         }
 
         Debug.Log("gamestate>> " + gamestate);
@@ -128,6 +178,7 @@ public class UIController : MonoBehaviour
     }
     private void InactiveImage()
     {
+        //Debug.Log("image inactive");
         mainImage.SetActive(false);
     }
 

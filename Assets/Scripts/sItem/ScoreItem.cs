@@ -18,9 +18,10 @@ public class ScoreItem : MonoBehaviour
         
     }
 
-    public void OnDestroy()
+    public void meDestoroy()
     {
-        AudioSource.PlayClipAtPoint(clip, Vector3.zero);
+        AudioSource.PlayClipAtPoint(clip, transform.position);
+        Destroy(this.gameObject);
     }
 
 }

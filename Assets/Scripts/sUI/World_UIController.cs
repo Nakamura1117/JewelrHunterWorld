@@ -52,12 +52,12 @@ public class World_UIController : MonoBehaviour
         if (currentKeys != GameManager.keys)
         {
             currentKeys = GameManager.keys;
-            keyText.text = currentKeys.ToString();
+            keyText.text = currentKeys.ToString("D2");
         }
         if (currentArrows != GameManager.arrows)
         {
             currentArrows = GameManager.arrows;
-            arrowText.text = currentArrows.ToString();
+            arrowText.text = currentArrows.ToString("3");
         }
 
     }
