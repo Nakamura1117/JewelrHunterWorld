@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyController : MonoBehaviour
 {
@@ -73,8 +72,6 @@ public class EnemyController : MonoBehaviour
     {
         if (onGround)
         {
-            // 速度を更新する
-            // Rigidbody2D を取ってくる
             Rigidbody2D rbody = GetComponent<Rigidbody2D>();
             if (isToRight)
             {
@@ -87,22 +84,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // 接触
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            //Debug.Log("enter");
             returnDirect();
             time = 0;                   //タイマーを初期化
-
-        //isToRight = !isToRight;     //フラグを反転させる
-        //if (isToRight)
-        //{
-        //    transform.localScale = new Vector2(-1, 1); // 向きの変更
-        //}
-        //else
-        //{
-        //    transform.localScale = new Vector2(1, 1); // 向きの変更
-        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -111,7 +96,6 @@ public class EnemyController : MonoBehaviour
         {
             if (!inDamage)
             {
-                //Debug.Log("damage");
                 inDamage = true;
                 ArrowController arrow = collision.gameObject.GetComponent<ArrowController>();
                 enemyLife -= arrow.attackPower;
@@ -141,16 +125,10 @@ public class EnemyController : MonoBehaviour
     public void returnDirect()
     {
         isToRight = !isToRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y,transform.localScale.z);
-        
-
-        //if (isToRight)
-        //{
-        //    transform.localScale = new Vector2(-1, 1);  // 向きの変更
-        //}
-        //else
-        //{
-        //    transform.localScale = new Vector2(1, 1);   // 向きの変更
-        //}
+        transform.localScale = new Vector3(
+            transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z
+            );
     }
 }

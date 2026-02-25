@@ -68,7 +68,6 @@ public class UIController : MonoBehaviour
 
         for (int i = 0; i < currentLife-1; i++) 
         {
-            //Debug.Log(i);
             float p = (lineSpace * (i + 1)) - 1;
             scaleLines[i] = Instantiate(scaleLine, Vector3.zero, quaternion.identity, scaleLine.transform.parent);
 
@@ -80,10 +79,6 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("UIController.Update>> " + GameManager.gameState + " cnt: "+GameManager.cnt);
-
-
-        //if (GameManager.gameState == GameState.GameClear || gm.isGameClear)
         if (GameManager.gameState == GameState.GameClear)
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
@@ -105,7 +100,6 @@ public class UIController : MonoBehaviour
             stageScore = 0;
             UpdateScore();
         }
-        //else if (GameManager.gameState == GameState.GameOver || gm.isGameOver)
         else if (GameManager.gameState == GameState.GameOver )
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
@@ -166,8 +160,6 @@ public class UIController : MonoBehaviour
     {
         if (GameManager.gameState == GameState.InGame)
         {
-            //Debug.Log(currentScore + "  , " + displayScore);
-
             if (currentScore > displayScore)
             {
                 displayScore += 1;
@@ -177,7 +169,6 @@ public class UIController : MonoBehaviour
     }
     private void InactiveImage()
     {
-        //Debug.Log("image inactive");
         mainImage.SetActive(false);
     }
 

@@ -1,9 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -36,12 +32,6 @@ public class Player : MonoBehaviour
     public static int hasArrows = 0;
     InputAction attackAction;
 
-    //bool isJump = true;
-    //bool isUpArrow=true;
-
-    //bool atRight = false;
-    //bool atLeft = false;
-
     InputAction moveAction;
     InputAction jumpAction;
     PlayerInput input;
@@ -56,8 +46,6 @@ public class Player : MonoBehaviour
         animator = this.GetComponent<Animator>();
         nowAnime = idolAnime;
         oldAnime = idolAnime;
-        //atRight = false;
-        //atLeft = false;
 
         input = this.GetComponent<PlayerInput>();
         moveAction = input.currentActionMap.FindAction("Move");
@@ -97,32 +85,14 @@ public class Player : MonoBehaviour
                                       Vector2.down,
                                       0.0f,
                                       groundLayer
-                                      );
-
-        //if (jumpAction.WasPressedThisFrame())
-        //{
-        //    goJump = true;
-        //}
-        //axisH = moveAction.ReadValue<Vector2>().x;
-
-
-        //axisH = Input.GetAxisRaw("Horizontal");
-        //axisV = Input.GetAxisRaw("Vertical");
-
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    //Debug.Log("downjump");
-        //    goJump=true;
-        //}
+                                    );
 
         if (axisH > 0.0f)
         {
-            //Debug.Log("右向き");
             rBody.transform.localScale = new Vector2(1, 1);
         }
         else if (axisH < 0.0f)
         {
-            //Debug.Log("左向き");
             rBody.transform.localScale = new Vector3(-1, 1);
         }
 
@@ -147,20 +117,6 @@ public class Player : MonoBehaviour
             oldAnime = nowAnime;
             animator.Play(nowAnime);
         }
-
-        //if (Input.GetKeyDown(KeyCode.RightArrow)) {  atRight = true; }
-        //if (Input.GetKeyUp(KeyCode.RightArrow)) {  atRight = false; }
-
-        //if (Input.GetKeyDown(KeyCode.LeftArrow)) {  atLeft = true; }
-        //if (Input.GetKeyUp(KeyCode.LeftArrow)) {  atLeft = false; }
-
-        //if (!atRight) { Console.WriteLine("右が押されています"); }
-        //if (atLeft) { Console.WriteLine("左が押されています"); }
-
-        //if (Input.GetKeyUp(KeyCode.UpArrow))
-        //{
-        //    isUpArrow = false;
-        //}
     }
 
     private void FixedUpdate()
@@ -170,29 +126,14 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //Debug.Log(isJump);
-        //if (axisV > 0.0f && isJump && !(isUpArrow))
-        //{
-        //    Debug.Log("ジャンプ");
-        //    rBody.linearVelocity = new Vector2(axisH * speed, axisV * jump);
-        //    isJump = false;
-        //    isUpArrow = true;
-        //}else
-        //{
-        //rBody.linearVelocity = new Vector2(axisH * speed, rBody.linearVelocity.y);
-        //}
-
         if (onGraund || axisH != 0)
         {
             rBody.linearVelocity = new Vector2(axisH * speed, rBody.linearVelocity.y);
 
         }
-        //Debug.Log("onground" + onGraund);
-        //Debug.Log("onjump" + goJump);
 
         if (onGraund && goJump)
         {
-                //Debug.Log("jump");
                 Vector2 jumpPow = new Vector2(0, jump);
                 rBody.AddForce(jumpPow, ForceMode2D.Impulse);
                 goJump = false;
@@ -204,12 +145,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Goal")
         {
-            Debug.Log("Goal");
             Goal();
         }
         else if (collision.gameObject.tag == "Dead")
         {
-            Debug.Log("Dead");
             Dead();
         }
         else if(collision.gameObject.tag == "ScoreItem")
@@ -232,12 +171,7 @@ public class Player : MonoBehaviour
             {
                 GetDamage(collision.gameObject);
             }
-            else 
-            {
-
-            }
         }
-
     }
 
     void OnSubmit(InputValue input)
@@ -247,13 +181,6 @@ public class Player : MonoBehaviour
             gm.GameEnd();
         }
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //if (collision.gameObject.layer == 6)
-    //{
-    //    isJump = true;
-    //}
-    //}
 
     private void OnMove(InputValue value)
     {
@@ -271,7 +198,6 @@ public class Player : MonoBehaviour
 
     private void OnAttack(InputValue value)
     {
-        //Debug.Log("OnAction");
         if(GameManager.arrows > 0)
         {
             ShootArrow();
@@ -280,7 +206,6 @@ public class Player : MonoBehaviour
 
     public void Goal ()
     {
-        Debug.Log("Player.Goal " + GameManager.cnt);
         GameManager.gameState = GameState.GameClear;
         animator.Play(goalAnime);
         GameStop();

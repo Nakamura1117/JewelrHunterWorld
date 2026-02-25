@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.Analytics;
 
 public class EntranceContrroler : MonoBehaviour
 {

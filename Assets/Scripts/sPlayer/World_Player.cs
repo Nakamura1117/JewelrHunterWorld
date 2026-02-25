@@ -95,6 +95,7 @@ public class World_Player : MonoBehaviour
         {
             angle += 360;
         }
+
         // 上記の不具合から、-1～-89か、271～395になるか不安定になると予想される？ため
         // 271～395を-1～-89へ変換
         else if (angle > 270)

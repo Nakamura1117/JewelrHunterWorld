@@ -15,18 +15,6 @@ public class Advent_Item : MonoBehaviour
     public int numberOfArrow = 10;
     public int recoveryValue = 1;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -36,6 +24,7 @@ public class Advent_Item : MonoBehaviour
                 case AdventItemType.Arrow:
                     GameManager.arrows += numberOfArrow;
                     break;
+
                 case AdventItemType.Key:
                     GameManager.keys++;
                     string sceneName = SceneManager.GetActiveScene().name;
@@ -46,10 +35,10 @@ public class Advent_Item : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(sceneName + "が登録されていません。");
                         GameManager.keyGot.Add(sceneName, true);
                     }
                     break;
+
                 case AdventItemType.Life:
                     Player.PlayerRecovery(1);
                     break;

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -16,13 +14,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameState gameState;
     public string nextSceneName;
-    //public string nextGameState;
-
+    
     public static int totalScore;
-
-    //AudioSource audioSource;
-    //public AudioClip meGameClear;
-    //public AudioClip meGameOver;
 
     public bool isGameClear = false;
     public bool isGameOver = false;
@@ -37,13 +30,9 @@ public class GameManager : MonoBehaviour
     static int pendingArrows;
     static int pendingKeys;
     static Dictionary<string, bool> pendingKeyGot = new Dictionary<string, bool>();
-
-    public static long cnt = 0;
-
-  
+      
     private void Awake()
     {
-        //audioSource = GetComponent<AudioSource>();
         gameState = GameState.InGame;
 
         if (keyGot == null)
@@ -60,24 +49,9 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //arrows = 10;
-        //keys = 1;
         PendingItems();
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-
-        //SoundManager.currentSoundManager.StopBGM();
-        //switch (currentSceneName)
-        //{
-        //    case "WorldMap":
-        //        break;
-
-        //    case "Boss":
-        //        break;
-
-        //    default:
-        //        break;
-        //}
 
         if (currentSceneName != "WorldMap")
         {
@@ -101,11 +75,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        cnt++;
-        //Debug.Log("GameManager.Update>> " + gameState + "  " + cnt);
         if (gameState != GameState.InGame)
         {
             return;
@@ -122,11 +93,8 @@ public class GameManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        //Debug.Log("GameManager.LateUpdate>> " + gameState + "  ;" + GameManager.cnt);
         if (gameState == GameState.GameClear)
         {
-            //audioSource.Stop();
-            //audioSource.PlayOneShot(meGameClear);
             SoundManager.currentSoundManager.StopBGM();
             SoundManager.currentSoundManager.PlayBGM(BGMType.GameClear);
             Invoke("GameStatusChange", 0.02f);
@@ -134,8 +102,6 @@ public class GameManager : MonoBehaviour
         }
         else if (gameState == GameState.GameOver)
         {
-            //audioSource.Stop();
-            //audioSource.PlayOneShot(meGameOver);
             SoundManager.currentSoundManager.StopBGM();
             SoundManager.currentSoundManager.PlayBGM(BGMType.GameOver);
             Invoke("GameStatusChange", 0.02f);
@@ -207,5 +173,10 @@ public class GameManager : MonoBehaviour
         pendingKeys = 0;
         pendingKeyGot.Clear();
 
+    }
+
+    public static void GameExit()
+    {
+        Application.Quit();
     }
 }

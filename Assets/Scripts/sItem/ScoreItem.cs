@@ -21,7 +21,6 @@ public class ScoreItem : MonoBehaviour
     public void meDestoroy()
     {
         SoundManager.currentSoundManager.PlaySE(SEType.ItemGet);
-        //AudioSource.PlayClipAtPoint(clip, transform.position);
         Destroy(this.gameObject);
     }
 

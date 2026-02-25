@@ -121,7 +121,6 @@ public class BossController : MonoBehaviour
 
     void BossDestroy()
     {
-        //Debug.Log("BossController.BossDestroy " + GameManager.cnt);
         player.GetComponent<Player>().Goal();
         Destroy(gameObject);
     }

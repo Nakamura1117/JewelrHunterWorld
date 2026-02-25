@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,9 +11,8 @@ public class BossEntrance : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //stagesClear = new Dictionary<int,bool>();
-
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -61,6 +59,5 @@ public class BossEntrance : MonoBehaviour
         {
             SceneManager.LoadScene(sceneName);
         }
-
     }
 }
