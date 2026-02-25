@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     bool onGround = false;              // 地面フラグ
     float time = 0;
 
-    public float enemyLife = 3;
+    public float enemyLife = 1;
     bool inDamage = false;
     float damageTime = 1.0f;
     Rigidbody2D rbody;
@@ -120,12 +120,12 @@ public class EnemyController : MonoBehaviour
                 rbody.AddForce(new Vector2(v.x * 100, v.y * 4), ForceMode2D.Impulse);
                 Invoke("DamageEnd", damageTime);
 
-                if (enemyLife == 0)
+                if (enemyLife <= 0)
                 {
-
                     rbody.linearVelocity = Vector2.zero;
                     GetComponent<CircleCollider2D>().enabled = false;
                     GetComponent<BoxCollider2D>().enabled = false;
+                    SoundManager.currentSoundManager.PlaySE(SEType.Enemykilled);
                     Destroy(this.gameObject, 0.25f);
                 }
             }

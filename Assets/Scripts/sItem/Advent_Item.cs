@@ -59,6 +59,7 @@ public class Advent_Item : MonoBehaviour
                     break;
             }
 
+            SoundManager.currentSoundManager.PlaySE(SEType.ItemGet);
             GetComponent<CircleCollider2D>().enabled = false;
             Rigidbody2D rbody = GetComponent<Rigidbody2D>();
             rbody.gravityScale = 1.0f;

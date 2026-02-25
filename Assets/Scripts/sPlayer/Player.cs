@@ -196,6 +196,7 @@ public class Player : MonoBehaviour
                 Vector2 jumpPow = new Vector2(0, jump);
                 rBody.AddForce(jumpPow, ForceMode2D.Impulse);
                 goJump = false;
+                
         }
     }
 
@@ -322,6 +323,7 @@ public class Player : MonoBehaviour
         if (GameManager.gameState != GameState.InGame) return;
 
         playerLife -= 1;
+        SoundManager.currentSoundManager.PlaySE(SEType.GetDamage);
         if (playerLife > 0)
         {
             rBody.linearVelocity = Vector2.zero;
@@ -346,6 +348,8 @@ public class Player : MonoBehaviour
     {
         Quaternion r;
         GameManager.arrows--;
+
+        SoundManager.currentSoundManager.PlaySE(SEType.Shoot);
 
         if(transform.localScale.x > 0)
         {

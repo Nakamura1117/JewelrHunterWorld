@@ -33,13 +33,9 @@ public class UIController : MonoBehaviour
 
     public GameObject scaleLine;
     
-    public GameManager gm;
-    private bool isEnd = false;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isEnd = false;
         GameManager.PendingItems();
         mainImage.transform.localPosition = Vector3.zero;
         timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
@@ -88,7 +84,7 @@ public class UIController : MonoBehaviour
 
 
         //if (GameManager.gameState == GameState.GameClear || gm.isGameClear)
-        if (gm.isGameClear && !(isEnd) )
+        if (GameManager.gameState == GameState.GameClear)
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
             mainImage.SetActive(true);
@@ -105,13 +101,12 @@ public class UIController : MonoBehaviour
                 GameManager.totalScore += time * 100;
             }
 
-            isEnd = true;
             GameManager.totalScore += stageScore;
             stageScore = 0;
             UpdateScore();
         }
         //else if (GameManager.gameState == GameState.GameOver || gm.isGameOver)
-        else if (gm.isGameOver && !(isEnd) )
+        else if (GameManager.gameState == GameState.GameOver )
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
             mainImage.SetActive(true);

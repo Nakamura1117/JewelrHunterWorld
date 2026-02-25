@@ -1584,6 +1584,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 935660947669238374, guid: 04c6396d852d5ed4a9b8d3b87abae3a5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 935660947669238374, guid: 04c6396d852d5ed4a9b8d3b87abae3a5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 935660947669238374, guid: 04c6396d852d5ed4a9b8d3b87abae3a5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1073819614367586087, guid: 04c6396d852d5ed4a9b8d3b87abae3a5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -10533,8 +10545,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   nextSceneName: WorldMap
-  meGameClear: {fileID: 8300000, guid: 14e8cc0cb119d26438b76956a285d2da, type: 3}
-  meGameOver: {fileID: 8300000, guid: 923409f1a6739d948b7fb189de2505a4, type: 3}
   isGameClear: 0
   isGameOver: 0
 --- !u!114 &2124375216

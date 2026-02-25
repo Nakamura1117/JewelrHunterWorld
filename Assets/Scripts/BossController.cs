@@ -24,7 +24,6 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Invoke("testInvoke", 1);
         if  (inDamage)
         {
             float val = Mathf.Sin(Time.time * 50);
@@ -71,6 +70,7 @@ public class BossController : MonoBehaviour
                     colliders[0].enabled = false;
                     colliders[1].enabled = false;
 
+
                     animator.SetTrigger("IsDead");
                     Invoke("BossSpriteOff", 1.0f);
                 }
@@ -80,7 +80,7 @@ public class BossController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float val = Mathf.Sin(Time.time);
+        float val = Mathf.Sin(Time.time * 2.0f);
 
         transform.position -= new Vector3(val * bossSpeed, 0, 0);
     }
@@ -114,13 +114,14 @@ public class BossController : MonoBehaviour
 
     void BossSpriteOff()
     {
+        SoundManager.currentSoundManager.PlaySE(SEType.Enemykilled);
         GetComponent<SpriteRenderer>().enabled = false;
         Invoke("BossDestroy", 3.0f);
     }
 
     void BossDestroy()
     {
-        Debug.Log("BossController.BossDestroy " + GameManager.cnt);
+        //Debug.Log("BossController.BossDestroy " + GameManager.cnt);
         player.GetComponent<Player>().Goal();
         Destroy(gameObject);
     }
@@ -128,10 +129,5 @@ public class BossController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, reactionDistance);
-    }
-
-    private void testInvoke()
-    {
-        Debug.Log("testInvoke  " + GameManager.cnt);
     }
 }

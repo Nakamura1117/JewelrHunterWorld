@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScoreItem : MonoBehaviour
 {
     public ItemData itemdata;
-    public AudioClip clip;
+    //public AudioClip clip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -20,7 +20,8 @@ public class ScoreItem : MonoBehaviour
 
     public void meDestoroy()
     {
-        AudioSource.PlayClipAtPoint(clip, transform.position);
+        SoundManager.currentSoundManager.PlaySE(SEType.ItemGet);
+        //AudioSource.PlayClipAtPoint(clip, transform.position);
         Destroy(this.gameObject);
     }
 

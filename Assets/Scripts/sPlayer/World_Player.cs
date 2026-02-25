@@ -90,13 +90,25 @@ public class World_Player : MonoBehaviour
             angle = rad * Mathf.Rad2Deg;
         }
 
+        // 入力によって-91～-180か、180～269になるか不安定なため、-91～-179を180～269に平準化
+        if(angle < -90)
+        {
+            angle += 360;
+        }
+        // 上記の不具合から、-1～-89か、271～395になるか不安定になると予想される？ため
+        // 271～395を-1～-89へ変換
+        else if (angle > 270)
+        {
+            angle -= 360;
+        }
+
         return angle;
     }
 
     private Direction AngleToDirection()
     {
         Direction dir;
-        if (angleZ > -89 && angleZ <= 89)
+        if (angleZ >= -89 && angleZ <= 89)
         {
             dir = Direction.right;
         }
