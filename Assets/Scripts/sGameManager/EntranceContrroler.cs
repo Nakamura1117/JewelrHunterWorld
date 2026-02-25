@@ -52,6 +52,8 @@ public class EntranceContrroler : MonoBehaviour
                     opened = true;
                     World_UIController.keyOpened[doorNumber] = true;
                     announcement = true;
+
+                    SaveDataManager.SaveGamedata();
                 }
                 else
                 {
@@ -94,7 +96,6 @@ public class EntranceContrroler : MonoBehaviour
             {
                 s = "解放";
             }
-
             messageText.text = string.Concat(sceneName + " への扉は " + s + " されている！");
         }
     }

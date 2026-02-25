@@ -11,10 +11,9 @@ public class UIController : MonoBehaviour
     public Sprite gameOverSpr;
     public Sprite gameClearSpr;
     public GameObject panel;
-    public GameObject restartGutton;
+    public GameObject restartButton;
     public GameObject nextButton;
-    private GameState gamestate = GameState.InGame;
-
+    
     public GameObject timeUI;
     public GameObject timeTxt;
     private TimeController timeController;
@@ -33,11 +32,14 @@ public class UIController : MonoBehaviour
     int currentLife;
 
     public GameObject scaleLine;
+    
+    public GameManager gm;
+    private bool isEnd = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        isEnd = false;
         GameManager.PendingItems();
         mainImage.transform.localPosition = Vector3.zero;
         timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
@@ -70,7 +72,7 @@ public class UIController : MonoBehaviour
 
         for (int i = 0; i < currentLife-1; i++) 
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             float p = (lineSpace * (i + 1)) - 1;
             scaleLines[i] = Instantiate(scaleLine, Vector3.zero, quaternion.identity, scaleLine.transform.parent);
 
@@ -82,13 +84,16 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState == GameState.GameClear)
+        //Debug.Log("UIController.Update>> " + GameManager.gameState + " cnt: "+GameManager.cnt);
+
+
+        //if (GameManager.gameState == GameState.GameClear || gm.isGameClear)
+        if (gm.isGameClear && !(isEnd) )
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
-            gamestate = GameState.GameClear;
             mainImage.SetActive(true);
             panel.SetActive(true);
-            Button bt = restartGutton.GetComponent<Button>();
+            Button bt = restartButton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameClearSpr;
 
@@ -100,14 +105,15 @@ public class UIController : MonoBehaviour
                 GameManager.totalScore += time * 100;
             }
 
+            isEnd = true;
             GameManager.totalScore += stageScore;
             stageScore = 0;
             UpdateScore();
         }
-        else if (GameManager.gameState == GameState.GameOver)
+        //else if (GameManager.gameState == GameState.GameOver || gm.isGameOver)
+        else if (gm.isGameOver && !(isEnd) )
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
-            gamestate = GameState.GameOver;
             mainImage.SetActive(true);
             panel.SetActive(true);
             Button bt = nextButton.GetComponent<Button>();
@@ -159,8 +165,6 @@ public class UIController : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("gamestate>> " + gamestate);
     }
 
     private void FixedUpdate()

@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
     public string sceneName;
+    public GameObject startButton;
+    public GameObject continueButton;
 
     //public InputAction submitAction;
     //public InputAction cancelAction;
@@ -22,7 +25,12 @@ public class TitleManager : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {        
+    {
+        string jsonData = PlayerPrefs.GetString("SaveData");
+        if(jsonData != null)
+        {
+            continueButton.GetComponent<Button>().interactable = false;
+        }
     }
 
     // Update is called once per frame
@@ -53,8 +61,14 @@ public class TitleManager : MonoBehaviour
 
     public void Load()
     {
-        GameManager.totalScore = 0;
+        //GameManager.totalScore = 0;
+        SaveDataManager.Initialize();
         SceneManager.LoadScene(sceneName);
     }
 
+    public void Continue()
+    {
+        SaveDataManager.LoadGameData();
+        SceneManager.LoadScene(sceneName);
+    }
 }

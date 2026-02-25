@@ -1369,7 +1369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91321b0f032a3854b970025ab7bb034a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleManager
-  sceneName: Base
+  sceneName: WorldMap
+  startButton: {fileID: 668964920}
+  continueButton: {fileID: 366327286}
 --- !u!114 &1056662513
 MonoBehaviour:
   m_ObjectHideFlags: 0

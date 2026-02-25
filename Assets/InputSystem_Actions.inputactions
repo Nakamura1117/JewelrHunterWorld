@@ -333,6 +333,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d9a65cb9-a587-48f5-acf7-8665ee6fe2d9",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cbac6039-9c09-46a1-b5f2-4e5124ccb5ed",
                     "path": "<Keyboard>/2",
                     "interactions": "",

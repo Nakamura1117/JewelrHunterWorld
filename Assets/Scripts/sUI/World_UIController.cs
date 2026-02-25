@@ -36,6 +36,7 @@ public class World_UIController : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         Vector2 currentPlayerPos = Vector2.zero;
+        
         for (int i = 0; i < obj.Length; i++)
         {
             if (obj[i].GetComponent<EntranceContrroler>().doorNumber == GameManager.currentDoorNumber)
@@ -57,7 +58,7 @@ public class World_UIController : MonoBehaviour
         if (currentArrows != GameManager.arrows)
         {
             currentArrows = GameManager.arrows;
-            arrowText.text = currentArrows.ToString("3");
+            arrowText.text = currentArrows.ToString("D3");
         }
 
     }

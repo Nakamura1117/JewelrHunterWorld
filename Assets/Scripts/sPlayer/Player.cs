@@ -117,12 +117,12 @@ public class Player : MonoBehaviour
 
         if (axisH > 0.0f)
         {
-            Debug.Log("‰EŒü‚«");
+            //Debug.Log("‰EŒü‚«");
             rBody.transform.localScale = new Vector2(1, 1);
         }
         else if (axisH < 0.0f)
         {
-            Debug.Log("¶Œü‚«");
+            //Debug.Log("¶Œü‚«");
             rBody.transform.localScale = new Vector3(-1, 1);
         }
 
@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
 
         if (onGraund && goJump)
         {
-                Debug.Log("jump");
+                //Debug.Log("jump");
                 Vector2 jumpPow = new Vector2(0, jump);
                 rBody.AddForce(jumpPow, ForceMode2D.Impulse);
                 goJump = false;
@@ -270,7 +270,7 @@ public class Player : MonoBehaviour
 
     private void OnAttack(InputValue value)
     {
-        Debug.Log("OnAction");
+        //Debug.Log("OnAction");
         if(GameManager.arrows > 0)
         {
             ShootArrow();
@@ -279,6 +279,7 @@ public class Player : MonoBehaviour
 
     public void Goal ()
     {
+        Debug.Log("Player.Goal " + GameManager.cnt);
         GameManager.gameState = GameState.GameClear;
         animator.Play(goalAnime);
         GameStop();
@@ -287,7 +288,6 @@ public class Player : MonoBehaviour
 
     public void Dead()
     {
-
         GameManager.gameState = GameState.GameOver;
         animator.Play(deadAnime);
         GameStop();

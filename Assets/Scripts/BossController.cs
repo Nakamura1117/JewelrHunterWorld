@@ -24,6 +24,7 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Invoke("testInvoke", 1);
         if  (inDamage)
         {
             float val = Mathf.Sin(Time.time * 50);
@@ -58,6 +59,7 @@ public class BossController : MonoBehaviour
         {
             if (collision.gameObject.tag == "Arrow")
             {
+
                 ArrowController arrow = collision.gameObject.GetComponent<ArrowController>();
                 hp -= arrow.attackPower;
                 inDamage = true;
@@ -118,6 +120,7 @@ public class BossController : MonoBehaviour
 
     void BossDestroy()
     {
+        Debug.Log("BossController.BossDestroy " + GameManager.cnt);
         player.GetComponent<Player>().Goal();
         Destroy(gameObject);
     }
@@ -127,5 +130,8 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, reactionDistance);
     }
 
-
+    private void testInvoke()
+    {
+        Debug.Log("testInvoke  " + GameManager.cnt);
+    }
 }

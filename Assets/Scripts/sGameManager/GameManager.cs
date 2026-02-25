@@ -1,4 +1,3 @@
-//using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -38,7 +37,9 @@ public class GameManager : MonoBehaviour
     static int pendingKeys;
     static Dictionary<string, bool> pendingKeyGot = new Dictionary<string, bool>();
 
+    public static long cnt = 0;
 
+  
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -53,21 +54,21 @@ public class GameManager : MonoBehaviour
         {
             keyGot.Add(SceneManager.GetActiveScene().name, false);
         }
-
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        arrows = 10;
-        keys = 1;
-
+        //arrows = 10;
+        //keys = 1;
         PendingItems();
     }
 
     // Update is called once per frame
     void Update()
     {
+        cnt++;
+        //Debug.Log("GameManager.Update>> " + gameState + "  " + cnt);
         if (gameState != GameState.InGame)
         {
             return;
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        //Debug.Log("GameManager.LateUpdate>> " + gameState + "  ;" + GameManager.cnt);
         if (gameState == GameState.GameClear)
         {
             audioSource.Stop();
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void Next()
     {
+        SaveDataManager.SaveGamedata();
         SceneManager.LoadScene(nextSceneName);
     }
 
@@ -147,5 +150,10 @@ public class GameManager : MonoBehaviour
                 keyGot[k.Key] = k.Value;
             }
         }
+
+        pendingArrows = 0;
+        pendingKeys = 0;
+        pendingKeyGot.Clear();
+
     }
 }

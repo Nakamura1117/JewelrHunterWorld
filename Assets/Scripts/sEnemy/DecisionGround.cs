@@ -20,7 +20,7 @@ public class DecisionGround : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         
-        if (collision.CompareTag("地形"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             if (transform.parent != null)
             {

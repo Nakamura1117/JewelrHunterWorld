@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -72,7 +71,7 @@ public class CameraController : MonoBehaviour
         {
             if (isForceScrollX == true)
             {
-                Debug.Log("サブ背景：強制スクロール：X");
+                //Debug.Log("サブ背景：強制スクロール：X");
 
                 subBack1.transform.localPosition -= new Vector3(forceScrollSpeedX * subBackScrollSpeed, 0, 0);
                 subBack2.transform.localPosition -= new Vector3(forceScrollSpeedX * subBackScrollSpeed, 0, 0);
@@ -82,7 +81,7 @@ public class CameraController : MonoBehaviour
             }
             else
             {
-                Debug.Log("サブ背景：通常スクロール：X");
+                //Debug.Log("サブ背景：通常スクロール：X");
                 if (playercontroller.GetAxisH() != 0)
                 {
                     subBack1.transform.localPosition -= new Vector3(playercontroller.GetAxisH() * subBackScrollSpeed, 0, 0);
