@@ -11,6 +11,7 @@ public class BossEntrance : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isOpened = false;
     }
 
     // Update is called once per frame
@@ -55,7 +56,8 @@ public class BossEntrance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" || isOpened)
+
+        if (collision.gameObject.tag == "Player" && isOpened)
         {
             SceneManager.LoadScene(sceneName);
         }
