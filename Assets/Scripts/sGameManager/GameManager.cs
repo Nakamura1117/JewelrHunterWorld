@@ -14,14 +14,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameState gameState;
     public string nextSceneName;
-    
     public static int totalScore;
 
     public bool isGameClear = false;
     public bool isGameOver = false;
 
     public static int currentDoorNumber = 0;
-    public static int keys = 1;
+    public static int keys = 0;
     public static Dictionary<string, bool> keyGot;
     public static int arrows = 10;
 
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
     static int pendingArrows;
     static int pendingKeys;
     static Dictionary<string, bool> pendingKeyGot = new Dictionary<string, bool>();
-      
+
     private void Awake()
     {
         gameState = GameState.InGame;
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
         if (keyGot == null)
         {
             keyGot = new Dictionary<string, bool>();
+            keys = 0;
         }
 
         if (!(keyGot.ContainsKey(SceneManager.GetActiveScene().name)))
@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PendingItems();
-
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         if (currentSceneName != "WorldMap")
@@ -125,12 +124,13 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.GameEnd)
         {
-            if (isGameClear) 
+            if (isGameClear)
             {
-                Next(); 
+                Next();
             }
-            else if (isGameOver) {
-                Restart(); 
+            else if (isGameOver)
+            {
+                Restart();
             }
         }
     }
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
     {
         pendingArrows = arrows;
         pendingKeys = keys;
-        foreach(var k in keyGot)
+        foreach (var k in keyGot)
         {
             pendingKeyGot[k.Key] = k.Value;
         }
@@ -161,9 +161,9 @@ public class GameManager : MonoBehaviour
         arrows = pendingArrows;
         keys = pendingKeys;
 
-        foreach(var k in pendingKeyGot)
+        foreach (var k in pendingKeyGot)
         {
-            if(k.Value != keyGot[k.Key])
+            if (k.Value != keyGot[k.Key])
             {
                 keyGot[k.Key] = k.Value;
             }
@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
 
     public static void GameExit()
     {
+        SaveDataManager.SaveGamedata();
         Application.Quit();
     }
 }
