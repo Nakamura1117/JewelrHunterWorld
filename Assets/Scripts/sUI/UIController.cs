@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
     public GameObject panel;
     public GameObject restartButton;
     public GameObject nextButton;
-    
+
     public GameObject timeUI;
     public GameObject timeTxt;
     private TimeController timeController;
@@ -32,11 +32,14 @@ public class UIController : MonoBehaviour
     int currentLife;
 
     public GameObject scaleLine;
-    
+
+    private bool isEndProcess;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.PendingItems();
+        isEndProcess = true;
+
         mainImage.transform.localPosition = Vector3.zero;
         timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
         if (timeController != null)
@@ -66,7 +69,7 @@ public class UIController : MonoBehaviour
         int lineSpace = (int)sliderWidth / Player.playerLife;
         GameObject[] scaleLines = new GameObject[currentLife];
 
-        for (int i = 0; i < currentLife-1; i++) 
+        for (int i = 0; i < currentLife - 1; i++)
         {
             float p = (lineSpace * (i + 1)) - 1;
             scaleLines[i] = Instantiate(scaleLine, Vector3.zero, quaternion.identity, scaleLine.transform.parent);
@@ -79,7 +82,8 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState == GameState.GameClear)
+
+        if (GameManager.gameState == GameState.GameClear && isEndProcess)
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
             mainImage.SetActive(true);
@@ -96,11 +100,14 @@ public class UIController : MonoBehaviour
                 GameManager.totalScore += time * 100;
             }
 
+            isEndProcess = false;
+
             GameManager.totalScore += stageScore;
             stageScore = 0;
             UpdateScore();
         }
-        else if (GameManager.gameState == GameState.GameOver )
+
+        else if (GameManager.gameState == GameState.GameOver && isEndProcess)
         {
             mainImage.transform.localPosition = new Vector3(0, 120, 0);
             mainImage.SetActive(true);
@@ -110,6 +117,8 @@ public class UIController : MonoBehaviour
             mainImage.GetComponent<Image>().sprite = gameOverSpr;
 
             GameManager.ReturnPending();
+
+            isEndProcess = false;
 
             if (timeController != null)
             {
