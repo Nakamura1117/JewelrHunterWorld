@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -27,7 +26,7 @@ public class CameraController : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         playercontroller = player.GetComponent<Player>();
-        this.transform.position = new Vector3(0, 0, -10);
+        this.transform.position = new Vector3(5, 0, -10);
 
     }
 
@@ -61,9 +60,6 @@ public class CameraController : MonoBehaviour
             y = Mathf.Clamp(player.transform.position.y, camBottom, camTop);
         }
 
-        //Debug.Log("x>> " + x);
-        //Debug.Log("y>> " + y);
-
         Vector3 camPos = new Vector3(x, y, -10);
         Camera.main.transform.position = camPos;
 
@@ -72,8 +68,6 @@ public class CameraController : MonoBehaviour
         {
             if (isForceScrollX == true)
             {
-                Debug.Log("サブ背景：強制スクロール：X");
-
                 subBack1.transform.localPosition -= new Vector3(forceScrollSpeedX * subBackScrollSpeed, 0, 0);
                 subBack2.transform.localPosition -= new Vector3(forceScrollSpeedX * subBackScrollSpeed, 0, 0);
 
@@ -82,7 +76,6 @@ public class CameraController : MonoBehaviour
             }
             else
             {
-                Debug.Log("サブ背景：通常スクロール：X");
                 if (playercontroller.GetAxisH() != 0)
                 {
                     subBack1.transform.localPosition -= new Vector3(playercontroller.GetAxisH() * subBackScrollSpeed, 0, 0);

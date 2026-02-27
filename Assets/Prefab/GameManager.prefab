@@ -47,8 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   nextSceneName: Result
-  meGameClear: {fileID: 8300000, guid: 14e8cc0cb119d26438b76956a285d2da, type: 3}
-  meGameOver: {fileID: 8300000, guid: 923409f1a6739d948b7fb189de2505a4, type: 3}
   isGameClear: 0
   isGameOver: 0
 --- !u!114 &7951133686949304447
@@ -72,7 +70,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5352445938916721731}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}

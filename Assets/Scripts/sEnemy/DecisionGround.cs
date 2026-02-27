@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DecisionGround : MonoBehaviour
@@ -14,17 +13,15 @@ public class DecisionGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        return;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         
-        if (collision.CompareTag("地形"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             if (transform.parent != null)
             {
-                Debug.Log("Decision Ground");
                 transform.parent.gameObject.GetComponent<EnemyController>().returnDirect();
             }
         }

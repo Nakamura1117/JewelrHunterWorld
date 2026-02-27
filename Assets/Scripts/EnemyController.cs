@@ -9,15 +9,24 @@ public class EnemyController : MonoBehaviour
     bool onGround = false;              // 地面フラグ
     float time = 0;
 
+    public float enemyLife = 1;
+    bool inDamage = false;
+    float damageTime = 1.0f;
+    Rigidbody2D rbody;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rbody = GetComponent<Rigidbody2D>();
+        inDamage = false;
+
         if (isToRight)
         {
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);// 向きの変更
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -38,14 +47,31 @@ public class EnemyController : MonoBehaviour
                 returnDirect();
             }
         }
-    }
 
+
+        if (GameManager.gameState != GameState.InGame || inDamage == true)
+        {
+            if (inDamage)
+            {
+                float val = Mathf.Sin(Time.time * 40);
+                if (val > 0)
+                {
+                    GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
+                }
+            }
+
+        }
+
+
+    }
     void FixedUpdate()
     {
         if (onGround)
         {
-            // 速度を更新する
-            // Rigidbody2D を取ってくる
             Rigidbody2D rbody = GetComponent<Rigidbody2D>();
             if (isToRight)
             {
@@ -58,49 +84,51 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // 接触
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        Debug.Log("enter");
-        returnDirect();
-        time = 0;                   //タイマーを初期化
-
-        //isToRight = !isToRight;     //フラグを反転させる
-        //if (isToRight)
-        //{
-        //    transform.localScale = new Vector2(-1, 1); // 向きの変更
-        //}
-        //else
-        //{
-        //    transform.localScale = new Vector2(1, 1); // 向きの変更
-        //}
+            returnDirect();
+            time = 0;                   //タイマーを初期化
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("地形"))
+        if (collision.gameObject.tag == "Arrow")
         {
-            if (transform.parent != null)
+            if (!inDamage)
             {
-                Debug.Log("Judg return");
-                returnDirect();
+                inDamage = true;
+                ArrowController arrow = collision.gameObject.GetComponent<ArrowController>();
+                enemyLife -= arrow.attackPower;
+                rbody.linearVelocity = Vector2.zero;
+                Vector3 v = (transform.position - collision.transform.position).normalized;
+                rbody.AddForce(new Vector2(v.x * 100, v.y * 4), ForceMode2D.Impulse);
+                Invoke("DamageEnd", damageTime);
+
+                if (enemyLife <= 0)
+                {
+                    rbody.linearVelocity = Vector2.zero;
+                    GetComponent<CircleCollider2D>().enabled = false;
+                    GetComponent<BoxCollider2D>().enabled = false;
+                    SoundManager.currentSoundManager.PlaySE(SEType.Enemykilled);
+                    Destroy(this.gameObject, 0.25f);
+                }
             }
         }
+    }
+
+    private void DamageEnd()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        inDamage = false;
     }
 
     public void returnDirect()
     {
         isToRight = !isToRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y,transform.localScale.z);
-        
-
-        //if (isToRight)
-        //{
-        //    transform.localScale = new Vector2(-1, 1);  // 向きの変更
-        //}
-        //else
-        //{
-        //    transform.localScale = new Vector2(1, 1);   // 向きの変更
-        //}
+        transform.localScale = new Vector3(
+            transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z
+            );
     }
 }

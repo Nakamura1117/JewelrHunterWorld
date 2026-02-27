@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Mathematics;
 
 
 public class UIController : MonoBehaviour
@@ -10,9 +11,8 @@ public class UIController : MonoBehaviour
     public Sprite gameOverSpr;
     public Sprite gameClearSpr;
     public GameObject panel;
-    public GameObject restartGutton;
+    public GameObject restartButton;
     public GameObject nextButton;
-    private GameState gamestate = GameState.InGame;
 
     public GameObject timeUI;
     public GameObject timeTxt;
@@ -24,9 +24,23 @@ public class UIController : MonoBehaviour
     private int currentScore = 0;
     private int displayScore = 0;
 
+    public TextMeshProUGUI keyText;
+    int currentKeys;
+    public TextMeshProUGUI arrowText;
+    int currentArrows;
+    public Slider lifeSlider;
+    int currentLife;
+
+    public GameObject scaleLine;
+
+    private bool isEndProcess;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isEndProcess = true;
+
+        mainImage.transform.localPosition = Vector3.zero;
         timeController = GameObject.FindWithTag("GameManager").GetComponent<TimeController>();
         if (timeController != null)
         {
@@ -41,17 +55,40 @@ public class UIController : MonoBehaviour
         panel.SetActive(false);
 
         UpdateScore();
+
+        currentKeys = GameManager.keys;
+        keyText.text = currentKeys.ToString();
+
+        currentArrows = GameManager.arrows;
+        arrowText.text = currentArrows.ToString();
+
+        currentLife = Player.playerLife;
+
+        Vector2 rect = lifeSlider.GetComponent<RectTransform>().sizeDelta;
+        float sliderWidth = rect.x;
+        int lineSpace = (int)sliderWidth / Player.playerLife;
+        GameObject[] scaleLines = new GameObject[currentLife];
+
+        for (int i = 0; i < currentLife - 1; i++)
+        {
+            float p = (lineSpace * (i + 1)) - 1;
+            scaleLines[i] = Instantiate(scaleLine, Vector3.zero, quaternion.identity, scaleLine.transform.parent);
+
+            scaleLines[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(p, 0);
+            scaleLines[i].SetActive(true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState == GameState.GameClear)
+
+        if (GameManager.gameState == GameState.GameClear && isEndProcess)
         {
-            gamestate = GameState.GameClear;
+            mainImage.transform.localPosition = new Vector3(0, 120, 0);
             mainImage.SetActive(true);
             panel.SetActive(true);
-            Button bt = restartGutton.GetComponent<Button>();
+            Button bt = restartButton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameClearSpr;
 
@@ -63,32 +100,52 @@ public class UIController : MonoBehaviour
                 GameManager.totalScore += time * 100;
             }
 
+            isEndProcess = false;
+
             GameManager.totalScore += stageScore;
             stageScore = 0;
             UpdateScore();
-
-
         }
-        else if (GameManager.gameState == GameState.GameOver)
+
+        else if (GameManager.gameState == GameState.GameOver && isEndProcess)
         {
-            gamestate = GameState.GameOver;
+            mainImage.transform.localPosition = new Vector3(0, 120, 0);
             mainImage.SetActive(true);
             panel.SetActive(true);
             Button bt = nextButton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameOverSpr;
 
+            GameManager.ReturnPending();
+
+            isEndProcess = false;
+
             if (timeController != null)
             {
                 timeController.IsTimeOver();
             }
-
         }
         else if (GameManager.gameState == GameState.InGame)
         {
             if (timeController != null)
             {
                 if (GameObject.FindWithTag("Player").GetComponent<Player>() == null) { return; }
+
+                if (currentKeys != GameManager.keys)
+                {
+                    currentKeys = GameManager.keys;
+                    keyText.text = currentKeys.ToString();
+                }
+                if (currentArrows != GameManager.arrows)
+                {
+                    currentArrows = GameManager.arrows;
+                    arrowText.text = currentArrows.ToString();
+                }
+                if (currentLife != Player.playerLife)
+                {
+                    currentLife = Player.playerLife;
+                    lifeSlider.value = currentLife;
+                }
 
                 if (timeController.gameTime > 0.0f)
                 {
@@ -103,22 +160,15 @@ public class UIController : MonoBehaviour
                     {
                         GameObject.FindWithTag("Player").GetComponent<Player>().Dead();
                     }
-
                 }
             }
-
-
         }
-
-        Debug.Log("gamestate>> " + gamestate);
     }
 
     private void FixedUpdate()
     {
         if (GameManager.gameState == GameState.InGame)
         {
-            //Debug.Log(currentScore + "  , " + displayScore);
-
             if (currentScore > displayScore)
             {
                 displayScore += 1;

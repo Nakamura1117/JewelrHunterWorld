@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -23,11 +22,15 @@ public class Player : MonoBehaviour
     string oldAnime = "";
 
     public int score = 0;
-    //bool isJump = true;
-    //bool isUpArrow=true;
+    public static int playerLife = 10;
+    private bool inDamage = false;
 
-    //bool atRight = false;
-    //bool atLeft = false;
+    public float shootSpeed = 12.0f;
+    public float shootDelay = 0.25f;
+    public GameObject arrowPrefab;
+    public GameObject gate;
+    public static int hasArrows = 0;
+    InputAction attackAction;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -43,8 +46,6 @@ public class Player : MonoBehaviour
         animator = this.GetComponent<Animator>();
         nowAnime = idolAnime;
         oldAnime = idolAnime;
-        //atRight = false;
-        //atLeft = false;
 
         input = this.GetComponent<PlayerInput>();
         moveAction = input.currentActionMap.FindAction("Move");
@@ -55,13 +56,27 @@ public class Player : MonoBehaviour
         InputActionMap uiMap = input.actions.FindActionMap("UI");
         uiMap.Disable();
 
+        playerLife = GameManager.defaultPlayerLife;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState != GameState.InGame) 
-        { 
+        if (GameManager.gameState != GameState.InGame || inDamage == true) 
+        {
+            if (inDamage)
+            {
+                float val = Mathf.Sin(Time.time * 50);
+                if (val > 0)
+                {
+                    GetComponent<SpriteRenderer>().enabled = true;
+                }
+                else 
+                { 
+                    GetComponent<SpriteRenderer>().enabled = false; 
+                }
+            }
+
             return; 
         }
 
@@ -70,32 +85,14 @@ public class Player : MonoBehaviour
                                       Vector2.down,
                                       0.0f,
                                       groundLayer
-                                      );
-
-        //if (jumpAction.WasPressedThisFrame())
-        //{
-        //    goJump = true;
-        //}
-        //axisH = moveAction.ReadValue<Vector2>().x;
-
-
-        //axisH = Input.GetAxisRaw("Horizontal");
-        //axisV = Input.GetAxisRaw("Vertical");
-
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    //Debug.Log("downjump");
-        //    goJump=true;
-        //}
+                                    );
 
         if (axisH > 0.0f)
         {
-            Debug.Log("右向き");
             rBody.transform.localScale = new Vector2(1, 1);
         }
         else if (axisH < 0.0f)
         {
-            Debug.Log("左向き");
             rBody.transform.localScale = new Vector3(-1, 1);
         }
 
@@ -120,55 +117,27 @@ public class Player : MonoBehaviour
             oldAnime = nowAnime;
             animator.Play(nowAnime);
         }
-
-        //if (Input.GetKeyDown(KeyCode.RightArrow)) {  atRight = true; }
-        //if (Input.GetKeyUp(KeyCode.RightArrow)) {  atRight = false; }
-
-        //if (Input.GetKeyDown(KeyCode.LeftArrow)) {  atLeft = true; }
-        //if (Input.GetKeyUp(KeyCode.LeftArrow)) {  atLeft = false; }
-
-        //if (!atRight) { Console.WriteLine("右が押されています"); }
-        //if (atLeft) { Console.WriteLine("左が押されています"); }
-
-        //if (Input.GetKeyUp(KeyCode.UpArrow))
-        //{
-        //    isUpArrow = false;
-        //}
     }
 
     private void FixedUpdate()
     {
-        if (GameManager.gameState != GameState.InGame)
+        if (GameManager.gameState != GameState.InGame || inDamage==true)
         {
             return;
         }
-
-        //Debug.Log(isJump);
-        //if (axisV > 0.0f && isJump && !(isUpArrow))
-        //{
-        //    Debug.Log("ジャンプ");
-        //    rBody.linearVelocity = new Vector2(axisH * speed, axisV * jump);
-        //    isJump = false;
-        //    isUpArrow = true;
-        //}else
-        //{
-        //rBody.linearVelocity = new Vector2(axisH * speed, rBody.linearVelocity.y);
-        //}
 
         if (onGraund || axisH != 0)
         {
             rBody.linearVelocity = new Vector2(axisH * speed, rBody.linearVelocity.y);
 
         }
-        //Debug.Log("onground" + onGraund);
-        //Debug.Log("onjump" + goJump);
 
         if (onGraund && goJump)
         {
-                Debug.Log("jump");
                 Vector2 jumpPow = new Vector2(0, jump);
                 rBody.AddForce(jumpPow, ForceMode2D.Impulse);
                 goJump = false;
+                
         }
     }
 
@@ -176,12 +145,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Goal")
         {
-            Debug.Log("Goal");
             Goal();
         }
         else if (collision.gameObject.tag == "Dead")
         {
-            Debug.Log("Dead");
             Dead();
         }
         else if(collision.gameObject.tag == "ScoreItem")
@@ -196,10 +163,15 @@ public class Player : MonoBehaviour
                 ui.UpdateScore(score);
             }
             score = 0;
-            Destroy(collision.gameObject);
-
+            collision.gameObject.GetComponent<ScoreItem>().meDestoroy();
         }
-
+        else if(collision.gameObject.tag == "Enemy")
+        {
+            if (!inDamage)
+            {
+                GetDamage(collision.gameObject);
+            }
+        }
     }
 
     void OnSubmit(InputValue input)
@@ -209,13 +181,6 @@ public class Player : MonoBehaviour
             gm.GameEnd();
         }
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //if (collision.gameObject.layer == 6)
-    //{
-    //    isJump = true;
-    //}
-    //}
 
     private void OnMove(InputValue value)
     {
@@ -231,6 +196,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnAttack(InputValue value)
+    {
+        if(GameManager.arrows > 0)
+        {
+            ShootArrow();
+        }
+    }
+
     public void Goal ()
     {
         GameManager.gameState = GameState.GameClear;
@@ -241,7 +214,6 @@ public class Player : MonoBehaviour
 
     public void Dead()
     {
-
         GameManager.gameState = GameState.GameOver;
         animator.Play(deadAnime);
         GameStop();
@@ -263,6 +235,66 @@ public class Player : MonoBehaviour
     public float GetAxisH()
     {
         return this.axisH;
+    }
+
+    public static void PlayerRecovery(int life)
+    {
+        playerLife += life;
+        if(playerLife > 10) playerLife = 10;
+    }
+
+    private void GetDamage(GameObject target)
+    {
+        if (GameManager.gameState != GameState.InGame) return;
+
+        playerLife -= 1;
+        SoundManager.currentSoundManager.PlaySE(SEType.GetDamage);
+        if (playerLife > 0)
+        {
+            rBody.linearVelocity = Vector2.zero;
+            Vector3 v = (transform.position - target.transform.position).normalized;
+            rBody.AddForce(new Vector2(v.x * 4, v.y * 4), ForceMode2D.Impulse);
+            inDamage = true;
+            Invoke("DamageEnd", 0.5f);
+        }
+        else
+        {
+            Dead();
+        }
+    }
+
+    private void DamageEnd()
+    {
+        inDamage = false;
+        GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    private void ShootArrow()
+    {
+        Quaternion r;
+        GameManager.arrows--;
+
+        SoundManager.currentSoundManager.PlaySE(SEType.Shoot);
+
+        if(transform.localScale.x > 0)
+        {
+            r = Quaternion.Euler(0, 0, 0);
+        }else
+        {
+            r = Quaternion.Euler(0, 0, 180);
+        }
+
+        GameObject arrowObj = Instantiate(
+            arrowPrefab, 
+            gate.transform.position,
+            r);
+
+        Rigidbody2D arrowRbody = arrowObj.GetComponent<Rigidbody2D>();
+        arrowRbody.AddForce(
+            new Vector2(transform.localScale.x * shootSpeed, 0),
+            ForceMode2D.Impulse
+            );
+
     }
 
 }

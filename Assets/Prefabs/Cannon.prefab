@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5333349321414413341, guid: 298aac83c42e34343a0dafa9e83a1ccf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 298aac83c42e34343a0dafa9e83a1ccf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,10 +138,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1014
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -186,4 +186,4 @@ MonoBehaviour:
   objPrefab: {fileID: 7873482433328558004, guid: 2ff75999bef8e4c5da56d06cd5f41508, type: 3}
   delayTime: 3
   fireSpeed: 4
-  length: 8
+  length: 20
