@@ -10,7 +10,7 @@ public class ResultManager : MonoBehaviour
 
     void OnSubmit(InputValue value)
     {
-        Destroy(SoundManager.currentSoundManager);
+        SoundManager.currentSoundManager = null;
         Load();
     }
 

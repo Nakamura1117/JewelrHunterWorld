@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,13 +14,11 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         string jsonData = PlayerPrefs.GetString("SaveData");
-        if(jsonData != null)
+        if (jsonData != null)
         {
             continueButton.GetComponent<Button>().interactable = false;
         }
-
-        SoundManager.currentSoundManager.StopBGM();
-        SoundManager.currentSoundManager.PlayBGM(BGMType.Title);
+        TitleBGMStartCol();
     }
 
     // Update is called once per frame
@@ -48,5 +47,13 @@ public class TitleManager : MonoBehaviour
     public void GameExit()
     {
         Application.Quit();
+    }
+
+    IEnumerator TitleBGMStartCol()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.currentSoundManager.StopBGM();
+        SoundManager.currentSoundManager.PlayBGM(BGMType.Title);
+
     }
 }
