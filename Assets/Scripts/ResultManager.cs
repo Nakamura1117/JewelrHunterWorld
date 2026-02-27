@@ -10,6 +10,7 @@ public class ResultManager : MonoBehaviour
 
     void OnSubmit(InputValue value)
     {
+        Destroy(SoundManager.currentSoundManager);
         Load();
     }
 
@@ -29,4 +30,5 @@ public class ResultManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
 }
