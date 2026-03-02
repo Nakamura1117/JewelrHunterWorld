@@ -30,7 +30,7 @@ https://github.com/user-attachments/assets/5dff3bc6-2c88-4aa6-824f-4f521c4143c0
 
 | 参考画像 |  ギミック  | 説明                                                                                               |
 | :------- | :--------: | :------------------------------------------------------------------------------------------------- |
-|<img width="170" height="95" alt="attack" src="https://github.com/user-attachments/assets/35469e18-3b04-46f1-bfe0-fb2d76717165" />|    攻撃    | 矢を放ちます。画面左上に表示されている残弾が０になると、打てません。                               |
+|<img width="170" height="95" alt="attack" src="https://github.com/user-attachments/assets/35469e18-3b04-46f1-bfe0-fb2d76717165" /><img width="168" height="74" alt="arrow" src="https://github.com/user-attachments/assets/f62c324e-4596-4838-9801-d649547c431a" />|    攻撃    | 矢を放ちます。画面左上に表示されている残弾が０になると、打てません。                               |
 |<img width="347" height="43" alt="hp" src="https://github.com/user-attachments/assets/c4d566ce-d094-4485-9923-c48231963934" />|  ダメージ  | プレイヤーが敵や砲弾にあたるとダメージを受けます。プレイヤーのＨＰが０になるとゲームオーバーです。 |
 |<img width="125" height="133" alt="stage_entrance" src="https://github.com/user-attachments/assets/19c3cace-367f-4227-9f87-d63568eca737" /> |  ステージ  | Enterキーで入場できます。鍵を使用しないと入れない場合も。                                          |
 | <img width="121" height="116" alt="goal" src="https://github.com/user-attachments/assets/c1ab02cb-de30-400e-9f04-d6a14b3f950a" /> | ゴール看板 | ステージクリアの目印です。クリアすると踊りだします。                                               |
