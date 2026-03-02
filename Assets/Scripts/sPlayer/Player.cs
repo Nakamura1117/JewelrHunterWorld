@@ -5,7 +5,6 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rBody;
     float axisH = 0.0f;
-    float axisV = 0.0f;
     public float speed = 3.0f;
     public float jump = 9.0f;
     public LayerMask groundLayer;
@@ -30,7 +29,6 @@ public class Player : MonoBehaviour
     public GameObject arrowPrefab;
     public GameObject gate;
     public static int hasArrows = 0;
-    InputAction attackAction;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -62,7 +60,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState != GameState.InGame || inDamage == true) 
+        if (GameManager.gameState != GameState.InGame || inDamage == true)
         {
             if (inDamage)
             {
@@ -71,13 +69,13 @@ public class Player : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().enabled = true;
                 }
-                else 
-                { 
-                    GetComponent<SpriteRenderer>().enabled = false; 
+                else
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
                 }
             }
 
-            return; 
+            return;
         }
 
         onGraund = Physics2D.CircleCast(transform.position,
@@ -107,10 +105,10 @@ public class Player : MonoBehaviour
                 nowAnime = runAnime;
             }
         }
-        else 
-        { 
+        else
+        {
             nowAnime = jumpAnime;
-        } 
+        }
 
         if (nowAnime != oldAnime)
         {
@@ -121,7 +119,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.gameState != GameState.InGame || inDamage==true)
+        if (GameManager.gameState != GameState.InGame || inDamage == true)
         {
             return;
         }
@@ -134,10 +132,10 @@ public class Player : MonoBehaviour
 
         if (onGraund && goJump)
         {
-                Vector2 jumpPow = new Vector2(0, jump);
-                rBody.AddForce(jumpPow, ForceMode2D.Impulse);
-                goJump = false;
-                
+            Vector2 jumpPow = new Vector2(0, jump);
+            rBody.AddForce(jumpPow, ForceMode2D.Impulse);
+            goJump = false;
+
         }
     }
 
@@ -151,9 +149,9 @@ public class Player : MonoBehaviour
         {
             Dead();
         }
-        else if(collision.gameObject.tag == "ScoreItem")
+        else if (collision.gameObject.tag == "ScoreItem")
         {
-            
+
             ScoreItem item = collision.gameObject.GetComponent<ScoreItem>();
             score = item.itemdata.value;
             UIController ui = Object.FindFirstObjectByType<UIController>();
@@ -165,7 +163,7 @@ public class Player : MonoBehaviour
             score = 0;
             collision.gameObject.GetComponent<ScoreItem>().meDestoroy();
         }
-        else if(collision.gameObject.tag == "Enemy")
+        else if (collision.gameObject.tag == "Enemy")
         {
             if (!inDamage)
             {
@@ -176,7 +174,7 @@ public class Player : MonoBehaviour
 
     void OnSubmit(InputValue input)
     {
-        if(GameManager.gameState != GameState.InGame)
+        if (GameManager.gameState != GameState.InGame)
         {
             gm.GameEnd();
         }
@@ -198,18 +196,18 @@ public class Player : MonoBehaviour
 
     private void OnAttack(InputValue value)
     {
-        if(GameManager.arrows > 0)
+        if (GameManager.arrows > 0)
         {
             ShootArrow();
         }
     }
 
-    public void Goal ()
+    public void Goal()
     {
         GameManager.gameState = GameState.GameClear;
         animator.Play(goalAnime);
         GameStop();
-        
+
     }
 
     public void Dead()
@@ -222,8 +220,8 @@ public class Player : MonoBehaviour
         rBody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
         Destroy(gameObject, 2.0f);
     }
-    
-   private void GameStop()
+
+    private void GameStop()
     {
         rBody.linearVelocity = new Vector2(0, 0);
 
@@ -231,7 +229,7 @@ public class Player : MonoBehaviour
         input.SwitchCurrentActionMap("UI");
         input.currentActionMap.Enable();
     }
-    
+
     public float GetAxisH()
     {
         return this.axisH;
@@ -240,7 +238,7 @@ public class Player : MonoBehaviour
     public static void PlayerRecovery(int life)
     {
         playerLife += life;
-        if(playerLife > 10) playerLife = 10;
+        if (playerLife > 10) playerLife = 10;
     }
 
     private void GetDamage(GameObject target)
@@ -276,16 +274,17 @@ public class Player : MonoBehaviour
 
         SoundManager.currentSoundManager.PlaySE(SEType.Shoot);
 
-        if(transform.localScale.x > 0)
+        if (transform.localScale.x > 0)
         {
             r = Quaternion.Euler(0, 0, 0);
-        }else
+        }
+        else
         {
             r = Quaternion.Euler(0, 0, 180);
         }
 
         GameObject arrowObj = Instantiate(
-            arrowPrefab, 
+            arrowPrefab,
             gate.transform.position,
             r);
 

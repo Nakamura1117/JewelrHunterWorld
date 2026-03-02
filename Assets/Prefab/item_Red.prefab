@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8221606302532177365}
   - component: {fileID: 4014133551046407791}
   - component: {fileID: 6710576923125516796}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: item_Red
   m_TagString: ScoreItem
   m_Icon: {fileID: 0}
@@ -142,4 +142,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreItem
   itemdata: {fileID: 11400000, guid: 9dd9a9eea683cdd48ae55279ea376fc8, type: 2}
-  clip: {fileID: 8300000, guid: cd58a698ea7768a469fea0bb34dc0a33, type: 3}

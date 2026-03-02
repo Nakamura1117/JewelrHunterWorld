@@ -18,7 +18,7 @@ public class TitleManager : MonoBehaviour
         {
             continueButton.GetComponent<Button>().interactable = false;
         }
-        TitleBGMStartCol();
+        StartCoroutine(TitleBGMStartCol());
     }
 
     // Update is called once per frame

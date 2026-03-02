@@ -86,8 +86,8 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            returnDirect();
-            time = 0;                   //タイマーを初期化
+        returnDirect();
+        time = 0;                   //タイマーを初期化
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
