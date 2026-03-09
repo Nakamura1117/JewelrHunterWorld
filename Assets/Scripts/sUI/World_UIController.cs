@@ -13,10 +13,13 @@ public class World_UIController : MonoBehaviour
     int currentArrows;
     GameObject player;
 
+    public TextMeshProUGUI scoreText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GameObject[] obj = GameObject.FindGameObjectsWithTag("Entrance");
+        scoreText.text = GameManager.totalScore.ToString("N0");
 
         if (keyOpened == null)
         {

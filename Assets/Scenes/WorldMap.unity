@@ -22231,8 +22231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   keyText: {fileID: 784188260}
   arrowText: {fileID: 214389351}
-  scoreTxt: {fileID: 2070821881}
-  stageScore: 0
+  scoreText: {fileID: 2070821883}
 --- !u!1001 &6352345031595852221
 PrefabInstance:
   m_ObjectHideFlags: 0

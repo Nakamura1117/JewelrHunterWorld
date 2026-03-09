@@ -46,7 +46,8 @@ public class TitleManager : MonoBehaviour
 
     public void GameExit()
     {
-        Application.Quit();
+        //Application.Quit();
+        SceneManager.LoadScene("Title");
     }
 
     IEnumerator TitleBGMStartCol()

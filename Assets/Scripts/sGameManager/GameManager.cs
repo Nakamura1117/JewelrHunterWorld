@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour
     public static void GameExit()
     {
         SaveDataManager.SaveGamedata();
-        Application.Quit();
+        //Application.Quit();
+        SceneManager.LoadScene("Title");
     }
 }
